@@ -290,10 +290,10 @@
         dest: /etc/telegraf/telegraf.conf
 
     ## Staring Telegraf Agent
-    - name: Starting Telegraf agent
+    - name: Restarting Telegraf agent
       service:
         name: telegraf
-        state: started
+        state: restarted
 
     ## Installing k9s
     - name: Downloading -brew- installation file 
@@ -322,3 +322,9 @@
         state: present
       environment:
         PATH: "{{ ansible_env.PATH }}:/home/linuxbrew/.linuxbrew/bin"
+
+    ## Starting Docker Containers
+    - name: Starting Docker Containers
+      become: yes
+      become_user: ubuntu
+      command: /home/ubuntu/startInfraServerDockers.sh
