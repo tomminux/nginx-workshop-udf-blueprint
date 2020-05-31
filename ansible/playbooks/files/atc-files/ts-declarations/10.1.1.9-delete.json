@@ -1,0 +1,4 @@
+{
+    "$schema": "https://raw.githubusercontent.com/F5Networks/f5-telemetry-streaming/master/src/nodejs/schema/base_schema.json",
+    "class": "Telemetry"
+}

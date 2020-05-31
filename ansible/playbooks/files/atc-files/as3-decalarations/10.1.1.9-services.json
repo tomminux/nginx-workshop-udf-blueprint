@@ -1,0 +1,138 @@
+{
+    "class": "AS3",
+    "action": "deploy",
+    "persist": true,
+    "declaration": {
+       "class": "ADC",
+       "schemaVersion": "3.0.0",
+       "id": "udf-system-services-2020051102",
+       "label": "UDF System Services",
+       "remark": "Needed Infrastructure Services",
+       "udf-system-services": {
+          "class": "Tenant",
+          "Grafana": {
+             "class": "Application",
+             "template": "generic",
+             "Grafana": {
+                "class": "Service_HTTPS",
+                "virtualAddresses": [
+                   "10.1.10.101"
+                ],
+                "pool": "grafana_pool",
+		"serverTLS": "grafana_selfsigned"
+             },
+	     "grafana_selfsigned": {
+                "class": "TLS_Server",
+                "certificates": [
+                   {
+                       "certificate": "grafana_use_local_default"
+                   }
+                ]
+             },
+             "grafana_use_local_default": {
+                "class": "Certificate",
+                "certificate": {"bigip":"/Common/default.crt"},
+                "privateKey": {"bigip":"/Common/default.key"}
+             },
+             "grafana_pool": {
+                "class": "Pool",
+                "monitors": [
+                   "http"
+                ],
+                "members": [{
+                   "servicePort": 3000,
+                   "serverAddresses": [
+                      "10.1.20.131"
+                   ]
+                }]
+             }
+          },
+          "Prometheus": {
+             "class": "Application",
+             "template": "generic",
+             "Prometheus": {
+                "class": "Service_HTTPS",
+                "virtualAddresses": [
+                   "10.1.10.102"
+                ],
+                "pool": "prometheus_pool",
+                "virtualPort": 443,
+		"serverTLS": "prometheus_selfsigned"
+             },
+	     "prometheus_selfsigned": {
+                "class": "TLS_Server",
+                "certificates": [
+                   {
+                       "certificate": "prometheus_use_local_default"
+                   }
+                ]
+             },
+             "prometheus_use_local_default": {
+                "class": "Certificate",
+                "certificate": {"bigip":"/Common/default.crt"},
+                "privateKey": {"bigip":"/Common/default.key"}
+             },
+             "prometheus_pool": {
+                "class": "Pool",
+                "monitors": [
+                   "http"
+                ],
+                "members": [{
+                   "servicePort": 9090,
+                   "serverAddresses": [
+                      "10.1.20.132"
+                   ]
+                }]
+             }
+          },
+          "Rancher": {
+            "class": "Application",
+            "template": "generic",
+            "Rancher": {
+               "class": "Service_TCP",
+               "virtualAddresses": [
+                  "10.1.10.103"
+               ],
+               "pool": "rancher_pool",
+               "virtualPort": 443
+            },
+            "rancher_pool": {
+               "class": "Pool",
+               "monitors": [
+                  "https"
+               ],
+               "members": [{
+                  "servicePort": 443,
+                  "serverAddresses": [
+                     "10.1.20.121"
+                  ]
+               }]
+            }
+         },
+         "NGINX-Controller": {
+            "class": "Application",
+            "template": "generic",
+            "NGINX-Controller": {
+               "class": "Service_TCP",
+               "virtualAddresses": [
+                  "10.1.10.104"
+               ],
+               "pool": "n-controller_pool",
+               "virtualPort": 443
+            },
+            "n-controller_pool": {
+               "class": "Pool",
+               "monitors": [
+                  "https"
+               ],
+               "members": [{
+                  "servicePort": 443,
+                  "serverAddresses": [
+                     "10.1.20.30"
+                  ]
+               }]
+            }
+         }
+       }
+    }
+}

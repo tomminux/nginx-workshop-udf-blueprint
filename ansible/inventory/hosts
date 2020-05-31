@@ -1,0 +1,46 @@
+[infra_server]
+infra-server ansible_host=10.1.1.4 secondNetIf_name=ens6 secondNetIf_ip=10.1.20.20 hostname=infra-server
+
+[nginx_controller_servers]
+ncontroller-pgsql ansible_host=10.1.1.4 secondNetIf_name=ens6 secondNetIf_ip=10.1.20.20 hostname=infra-server
+nginx-controller ansible_host=10.1.1.8 secondNetIf_name=ens6 secondNetIf_ip=10.1.20.70 hostname=nginx-controller
+
+[glusterfs_servers]
+glusterfs-server ansible_host=10.1.1.4 secondNetIf_name=ens6 secondNetIf_ip=10.1.20.20 hostname=infra-server
+
+[nginx_plus_servers]
+nginx-plus-1 ansible_host=10.1.1.11 secondNetIf_name=ens6 secondNetIf_ip=10.1.20.11 hostname=nginx-plus-1
+nginx-plus-2 ansible_host=10.1.1.12 secondNetIf_name=ens6 secondNetIf_ip=10.1.20.12 hostname=nginx-plus-2
+
+[k8s_masters]
+k8s-master ansible_host=10.1.1.5 secondNetIf_name=ens6 secondNetIf_ip=10.1.20.60 hostname=k8s-master
+
+[k8s_nodes]
+k8s-node1 ansible_host=10.1.1.6 secondNetIf_name=ens6 secondNetIf_ip=10.1.20.61 hostname=k8s-node1
+k8s-node2 ansible_host=10.1.1.7 secondNetIf_name=ens6 secondNetIf_ip=10.1.20.62 hostname=k8s-node2
+
+[k8s_allnodes:children]
+k8s_masters
+k8s_nodes
+
+[telegraf_nodes:children]
+infra_server
+nginx_controller_servers
+glusterfs_servers
+nginx_plus_servers
+
+
+[k8s_allnodes:vars]
+ansible_python_interpreter=/usr/bin/python3
+
+[infra_server:vars]
+ansible_python_interpreter=/usr/bin/python3
+
+[nginx_controller_servers:vars]
+ansible_python_interpreter=/usr/bin/python3
+
+[nginx_plus_servers:vars]
+ansible_python_interpreter=/usr/bin/python3
+
+[glusterfs_servers:vars]
+ansible_python_interpreter=/usr/bin/python3

@@ -1,0 +1,324 @@
+## ----------------------------------------------------------------------------
+## ..:: infra-server installation ::..
+## ----------------------------------------------------------------------------
+
+- hosts: infra-server
+  remote_user: root
+  tasks:
+
+    - name: Upgrading all packages to the latest version
+      apt:
+        update_cache: yes
+        upgrade: dist
+
+    - name: Copy hosts file
+      copy:
+        src: hosts
+        dest: /etc/hosts
+
+    - name: Set timezone to Europe/Rome
+      timezone:
+        name: Europe/Rome
+
+    ## Installing a bunch of needed software
+    ## ------------------------------------- 
+    - name: Installing needed software
+      apt:
+        pkg:
+        - apt-transport-https 
+        - ca-certificates 
+        - curl 
+        - software-properties-common
+        - python3-pip
+        - build-essential
+        - glusterfs-client 
+        - glusterfs-common 
+        - glusterfs-server
+
+    ## GlusterFS Configuration
+    ## -----------------------
+    - name: Enabling glasterd at boot
+      service: 
+        name: glusterd
+        enabled: yes
+
+    - name: Starting glasterd
+      service: 
+        name: glusterd
+        state: started
+
+    - name: Creating GlusterFS directory to host volumes
+      file:
+        path: /usr/local/share/gv
+        state: directory
+    
+    - name: Create k8s-udf-storage volume
+      command: gluster volume create k8s-udf-storage glfs.f5-udf.com:/usr/local/share/gv/k8s-udf-storage force
+           
+    - name: Start k8s-udf-storage volume
+      command: gluster volume start k8s-udf-storage
+           
+
+    ## Installing ..:: Docker CE ::..
+    ## ------------------------------
+    - name: adding Docker apt-key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: adding Docker's APT repository
+      apt_repository:
+       repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable
+       state: present
+       filename: 'docker-ce'
+
+    - name: installing docker-ce
+      apt:
+        name: docker-ce
+        state: present
+        update_cache: true
+    
+    - name: Adding ububtu user to docker group
+      command: usermod -aG docker ubuntu
+
+    - name: Configure Docker to use a self signed certificate with local Registry
+      lineinfile: 
+        dest: /lib/systemd/system/docker.service
+        regexp: '^ExecStart' 
+        line: 'ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --insecure-registry registry.f5-udf.com:5000'
+        backrefs: yes
+
+    - name: Restart service Docker - Reload files
+      command: systemctl daemon-reload
+
+    - name: Restart service Docker
+      service:
+        name: docker
+        state: restarted
+
+    ## Installing Kubernetes' ..:: kubectl ::.. command
+    ## ------------------------------------------------ 
+    - name: adding Kubernetes apt-key
+      apt_key:
+        url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+        state: present
+
+    - name: adding Kubernetes' APT repository
+      apt_repository:
+       repo: deb http://apt.kubernetes.io/ kubernetes-xenial main
+       state: present
+       filename: 'kubernetes'
+
+    - name: installing kubectl
+      apt:
+        name: kubectl
+        state: present
+        update_cache: true
+
+    ## Preparing for dockers execution - ..:: dockerhost-files ::... file structure
+    ## ----------------------------------------------------------------------------
+
+    ## Creating "monitoring-net" docker network
+    - name: Create moonitoring-net Docker network
+      become: true
+      become_user: ubuntu
+      command: docker network create monitoring-net
+
+    ## REGISTRY
+    - name: Registry Docker storage configuration - ca-certificates
+      file:
+        path: /home/ubuntu/dockerhost-storage/registry/ca-certificates
+        state: directory
+        owner: ubuntu
+        group: ubuntu
+
+    - name: Registry Docker storage configuration - var-lib-registry
+      file:
+        path: /home/ubuntu/dockerhost-storage/registry/var-lib-registry
+        state: directory
+        owner: ubuntu
+        group: ubuntu
+
+    - name: Copying registry certificate and key
+      copy:
+        src: docker-files/registry.{{ item }}
+        dest: /home/ubuntu/dockerhost-storage/registry/ca-certificates/
+        owner: ubuntu
+        group: ubuntu
+      with_items:
+        - key
+        - crt
+    
+    ## RANCHER
+    - name: RancherUI Docker storage configuration
+      file:
+        path: /home/ubuntu/dockerhost-storage/rancher
+        state: directory
+        owner: ubuntu
+        group: ubuntu
+    
+    ## F5-CLI
+    - name: F5 CLI Docker storage configuration - f5-cli
+      file:
+        path: /home/ubuntu/dockerhost-storage/f5-cli/f5-cli/{{ item }}
+        state: directory
+        owner: ubuntu
+        group: ubuntu
+      with_items:
+        - do
+        - as3
+        - ts
+
+    - name: F5 CLI Docker storage configuration - .f5_cli
+      file:
+        path: /home/ubuntu/dockerhost-storage/f5-cli/.f5_cli
+        state: directory
+        owner: ubuntu
+        group: ubuntu
+
+    - name: Creating alias runf5cli
+      lineinfile:
+        path: /home/ubuntu/.bashrc
+        line: alias runf5cli='docker run --rm -it -v /home/ubuntu/dockerhost-storage/f5-cli/.f5_cli:/root/.f5_cli -v /home/ubuntu/dockerhost-storage/f5-cli/f5-cli/:/f5-cli f5devcentral/f5-cli:latest'
+
+    - name: Copy do file
+      copy:
+        src: atc-files/do-declarations/10.1.1.9.json
+        dest: /home/ubuntu/dockerhost-storage/f5-cli/f5-cli/do/
+        owner: ubuntu
+        group: ubuntu
+
+    - name: Copy ts file
+      copy:
+        src: atc-files/ts-declarations/10.1.1.9.json
+        dest: /home/ubuntu/dockerhost-storage/f5-cli/f5-cli/ts/
+        owner: ubuntu
+        group: ubuntu
+
+    ## GITLAB
+    - name: Gitlab Docker storage configuration - config
+      file:
+        path: /home/ubuntu/dockerhost-storage/gitlab/config
+        state: directory
+        owner: ubuntu
+        group: ubuntu
+
+    - name: Gitlab Docker storage configuration - data
+      file:
+        path: /home/ubuntu/dockerhost-storage/gitlab/data
+        state: directory
+        owner: ubuntu
+        group: ubuntu
+
+    - name: Gitlab Docker storage configuration - logs
+      file:
+        path: /home/ubuntu/dockerhost-storage/gitlab/logs
+        state: directory
+        owner: ubuntu
+        group: ubuntu
+
+    ## GRAFANA
+    - name: Grafana Docker storage configuration
+      file:
+        path: /home/ubuntu/dockerhost-storage/grafana
+        state: directory
+        owner: 472
+        group: 472
+
+    ## PROMETHEUS
+    - name: Prometheus Docker storage configuration
+      file:
+        path: /home/ubuntu/dockerhost-storage/prometheus/{{ item }}
+        state: directory
+        owner: ubuntu
+        group: ubuntu
+      with_items:
+        - config
+        - data
+
+    - name: Copying Prometheus Configufation file on dockerhost-storage proometheus config dir
+      copy:
+        src: docker-files/prometheus.yml
+        dest: /home/ubuntu/dockerhost-storage/prometheus/config/
+        owner: ubuntu
+        group: ubuntu
+
+    ## GRAPHITE
+    - name: Graphite Docker storage configuration
+      file:
+        path: /home/ubuntu/dockerhost-storage/graphite/{{ item }}
+        state: directory
+        owner: ubuntu
+        group: ubuntu
+      with_items:
+        - conf
+        - data
+        - statsd-config
+        - statsd
+
+    ## DOCKER STARTUP FILE
+    - name: Copying Docker startup file on ubuntu home dir 
+      copy:
+        src: docker-files/startInfraServerDockers.sh
+        dest: /home/ubuntu/startInfraServerDockers.sh
+        owner: ubuntu
+        group: ubuntu
+        mode: '0755'
+
+    ## TELEGRAF
+    - name: Adding influx apt-key
+      apt_key:
+        url: https://repos.influxdata.com/influxdb.key
+        state: present
+
+    - name: Adding Influx apt reporisotries
+      shell: echo "deb https://repos.influxdata.com/ubuntu `lsb_release -cs` stable\n" > /etc/apt/sources.list.d/influxdb.list
+
+    - name: Upgrading all packages to the latest version
+      apt:
+        update_cache: yes
+        upgrade: dist
+
+    - name: Installing Telegraf
+      apt:
+        pkg:
+        - telegraf
+
+    - name: Copying Telegraf configuration file
+      template:
+        src: telegraf.conf.j2
+        dest: /etc/telegraf/telegraf.conf
+
+    ## Staring Telegraf Agent
+    - name: Starting Telegraf agent
+      service:
+        name: telegraf
+        state: started
+
+    ## Installing k9s
+    - name: Downloading -brew- installation file 
+      get_url:
+        url: https://raw.githubusercontent.com/Homebrew/install/master/install.sh
+        dest: /home/ubuntu/install-k9s.sh
+        mode: '0755'
+
+    - name: Installing -brew-
+      become: true
+      become_user: ubuntu
+      command: /bin/bash -c "echo'y' | /home/ubuntu/install-k9s.sh"
+      args: 
+         chdir: /home/ubuntu/
+
+    - name: Adding -brew- bin dir to PATH
+      lineinfile:
+        path: /home/ubuntu/.profile
+        line: PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
+
+    - name: Installing k9s through Brew Package manager
+      become: true
+      become_user: ubuntu
+      homebrew:
+        name: derailed/k9s/k9s
+        state: present
+      environment:
+        PATH: "{{ ansible_env.PATH }}:/home/linuxbrew/.linuxbrew/bin"

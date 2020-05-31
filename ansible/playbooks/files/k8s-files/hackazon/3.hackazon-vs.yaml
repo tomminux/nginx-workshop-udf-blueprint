@@ -1,0 +1,15 @@
+apiVersion: k8s.nginx.org/v1
+kind: VirtualServer
+metadata:
+  name: hackazon-vs
+  namespace: hackazon
+spec:
+  host: hackazon.f5-udf.com
+  upstreams:
+  - name: hackazon
+    service: hackazon
+    port: 80
+  routes:
+  - path: /
+    action:
+      pass: hackazon

@@ -1,0 +1,95 @@
+{
+    "$schema": "https://raw.githubusercontent.com/F5Networks/f5-declarative-onboarding/master/src/schema/latest/base.schema.json",
+    "schemaVersion": "1.12.0",
+    "class": "Device",
+    "async": true,
+    "label": "LTM declaration for declarative onboarding",
+    "Common": {
+        "class": "Tenant",
+        "mySystem": {
+            "class": "System",
+            "hostname": "bigip-security-mgmt.f5-udf.com",
+            "cliInactivityTimeout": 1200,
+            "consoleInactivityTimeout": 1200,
+            "autoPhonehome": false
+        },
+        "myDns": {
+            "class": "DNS",
+            "nameServers": [
+                "8.8.8.8",
+                "8.8.4.4"
+            ],
+            "search": [
+                "local"
+            ]
+        },
+        "myNtp": {
+            "class": "NTP",
+            "servers": [
+                "0.pool.ntp.org",
+                "1.pool.ntp.org",
+                "2.pool.ntp.org"
+            ],
+            "timezone": "CET"
+        },
+        "myProvisioning": {
+            "class": "Provision",
+            "ltm": "nominal",
+            "avr": "nominal"
+        },
+        "internal": {
+            "class": "VLAN",
+            "interfaces": [{
+                "name": "1.2"
+            }],
+            "cmpHash": "dst-ip"
+        },
+        "internal-self": {
+            "class": "SelfIp",
+            "address": "10.1.20.10/24",
+            "vlan": "internal",
+            "allowService": "none",
+            "trafficGroup": "traffic-group-local-only"
+        },
+        "external": {
+            "class": "VLAN",
+            "interfaces": [{
+                "name": "1.1"
+            }]
+        },
+        "external-self": {
+            "class": "SelfIp",
+            "address": "10.1.10.10/24",
+            "vlan": "external",
+            "allowService": "none",
+            "trafficGroup": "traffic-group-local-only"
+        },
+        "default": {
+            "class": "Route",
+            "gw": "10.1.10.1",
+            "network": "default",
+            "mtu": 1500
+        },
+        "dbvars": {
+            "class": "DbVariables",
+            "ui.advisory.enabled": true,
+            "ui.advisory.color": "green",
+            "ui.advisory.text": "BIG-IP Security in UDF"
+        },
+        "mySnmpAgent": {
+            "class": "SnmpAgent",
+            "contact": "Paolo Arcagni <p.arcagni@f5.com>",
+            "location": "Milan, IT",
+            "allowList": [
+                "10.0.0.0/8"
+            ]
+        },
+        "public": {
+            "class": "SnmpCommunity",
+            "ipv6": false,
+            "source": "all",
+            "oid": ".1",
+            "access": "ro"
+        }
+    }
+}
