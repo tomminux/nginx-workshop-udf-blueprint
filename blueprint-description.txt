@@ -1,0 +1,39 @@
+..:: AN NGINX WORKSHOP - BLUEPRINT IN AWS ::..
+-------------------------------------------------------------------------------
+
+INTRODUCTION
+
+This workshop has been developed to assist SEs in building a workshop around NGINX and its multiple features:
+
+* WEB Server (conteinerized)
+* NGINX Unit (conteinerized)
+* NGINX Kubernetes Ingress Controller
+* NGINX Plus (LB / Reverse Proxy)
+* NGINX Controller 3.x
+* NGINX API Gateway
+* Augmented use case with NGINX KIC and BIG-IP CIS in Calico mode and / or NodePort.
+
+WHAT'S AVAILABLE?
+
+* 3 x Networks (Management, external, internal)
+* 1 x Windows Server Jumhost, with Chrome and Postman installed
+* 1 x BIG-IP called bigip-security (15.0.1)
+* 2 x NGINX Plus running on Ubuntu Server 18.04
+* 1 x NGINX Controller running on Ubuntu Server 18.04
+* 1 x k8s CLuster (1 master and 2 nodes, everything built on Ubuntu Server 18.04)
+* 1 x "infra-server", an Ubuntu Server 18.04 Host which is acting as the main control point of the entire Blueprint.
+
+Docker is running on infra-server and providing the following functions:
+
+* Gitlab 
+* Rancher GUI
+* Private Docker Registry
+* Grafana
+* Prometheus
+* Grafite / Statsd
+
+BUILDING THE BLUEPRINT
+
+A document with a complete set of instractions on how to build this blueprint through Ansible playbooks is available at this address: https://github.com/tomminux/nginx-workshop-udf-blueprint/blob/master/README.md
+
+The Github repository https://github.com/tomminux/nginx-workshop-udf-blueprint contains all the playbooks and files needed to build this blueprint.
