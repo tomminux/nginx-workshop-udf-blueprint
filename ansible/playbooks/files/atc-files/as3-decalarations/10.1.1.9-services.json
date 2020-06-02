@@ -136,37 +136,51 @@
           "Gitlab": {
             "class": "Application",
             "template": "generic",
-            "Rancher": {
-               "class": "Service_TCP",
+            "Gitlab": {
+               "class": "Service_HTTPS",
                "virtualAddresses": [
                   "10.1.10.203"
                ],
                "pool": "gitlab_pool",
-               "virtualPort": 443
-            },
+               "virtualPort": 443,
+         		"serverTLS": "gitlab_selfsigned"
+             },
+	     "gitlab_selfsigned": {
+                "class": "TLS_Server",
+                "certificates": [
+                   {
+                       "certificate": "gitlab_use_local_default"
+                   }
+                ]
+             },
+             "gitlab_use_local_default": {
+                "class": "Certificate",
+                "certificate": {"bigip":"/Common/default.crt"},
+                "privateKey": {"bigip":"/Common/default.key"}
+             },
             "gitlab_pool": {
                "class": "Pool",
                "monitors": [
-                  "https"
+                  "http"
                ],
                "members": [{
-                  "servicePort": 443,
+                  "servicePort": 80,
                   "serverAddresses": [
                      "10.1.20.80"
                   ]
                }]
             }
          },
-          "Gtaphite": {
+          "Graphite": {
              "class": "Application",
              "template": "generic",
-             "Grafana": {
+             "Graphite": {
                 "class": "Service_HTTPS",
                 "virtualAddresses": [
                    "10.1.10.204"
                 ],
                 "pool": "graphite_pool",
-         		"serverTLS": "grafana_selfsigned"
+         		"serverTLS": "graphite_selfsigned"
              },
 	     "graphite_selfsigned": {
                 "class": "TLS_Server",

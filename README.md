@@ -1,14 +1,8 @@
 # NGINX Workshop - Blueprint Building Procedure
-
-## TMP
-
-    cd ~/paoloData/dev/git-cloned ; tar zcvf /tmp/tmp.tgz nginx-workshop-udf-blueprint ; scp -i ~/.ssh/digitalocean /tmp/tmp.tgz paolo@174.138.13.130:. # toPdo
-    
-    cd ~ ; rm -rf nginx-workshop-udf-blueprint ; scp paolo@174.138.13.130:tmp.tgz . ; tar zxvf tmp.tgz ; rm tmp.tgz ; cp dockerhost-storage/registry/ca-certificates/registry.* nginx-workshop-udf-blueprint/ansible/playbooks/files/docker-files/. ; cd nginx-workshop-udf-blueprint/ansible/ # init repo
     
 ## Introduction
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vulputate justo ante, sed consectetur metus finibus sed. Ut eu massa imperdiet, vehicula justo vel, ornare justo. Sed rhoncus hendrerit lacus, id rutrum dolor sagittis eget. Phasellus lacinia, arcu sagittis faucibus eleifend, metus lacus iaculis nulla, ac hendrerit dolor dolor sed purus. Vestibulum ultrices, lectus id fermentum accumsan, dui erat feugiat ante, nec pellentesque metus nisi vitae sapien. Nam pharetra porttitor orci vel ornare. Nam pulvinar turpis ac magna dictum, eu tempor nisi venenatis. Sed mollis eros ac risus semper, ac convallis libero tristique. Curabitur tincidunt nisl at quam malesuada, ac aliquet ante tempor. Fusce eleifend consectetur ornare. Phasellus egestas ante non dolor aliquet vehicula. Sed euismod ex enim, vel tempus urna pulvinar vel. Duis id lobortis felis.
+To be completed
 
 ## ..:: infra-server ::.. Initial configuration 
 

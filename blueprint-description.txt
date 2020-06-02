@@ -13,6 +13,8 @@ This workshop has been developed to assist SEs in building a workshop around NGI
 * NGINX API Gateway
 * Augmented use case with NGINX KIC and BIG-IP CIS in Calico mode and / or NodePort.
 
+For anything related to this blueprint, please get in touch with Paolo Arcagni, p.arcagni@f5.com
+
 WHAT'S AVAILABLE?
 
 * 3 x Networks (Management, external, internal)
@@ -31,6 +33,16 @@ Docker is running on infra-server and providing the following functions:
 * Grafana
 * Prometheus
 * Grafite / Statsd
+
+All UI for these dockers are available through BIG-IP VS published in the BIG-IP component on this Blueprint. 
+
+Credentials are logged in the dedicated panel inside each blueprint component. 
+All Ubuntu boxes are accessible through SSH from the blueprint using SSH keys and "ubuntu" user.
+Gitlab and Grafana are all fresh install and will ask for a password definition at first login. 
+
+K8s was configure from the Ansible Playbook to run the CALICO overlay network; BIG-IP was added as a BGP Peer. BGP Configuration for Calico on BIG-IP has been done.
+
+k8s cluster was imported in RancherUI as k8s-udf (look in infra-server description for Rancher credentials)
 
 BUILDING THE BLUEPRINT
 
