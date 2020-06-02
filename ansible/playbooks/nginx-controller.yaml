@@ -1,0 +1,143 @@
+## ----------------------------------------------------------------------------
+## ..:: NGINX Controller installation ::..
+## ----------------------------------------------------------------------------
+
+## Updading Ubuntu distribution on Postgresql hosts
+- hosts: ncontroller-pgsql
+  remote_user: root
+  tasks:
+
+    - name: Set timezone to Europe/Rome
+      timezone:
+        name: Europe/Rome
+
+    - name: Upgrading all packages to the latest version
+      apt:
+        update_cache: yes
+        upgrade: dist
+
+    ## Installing PostgreSQL Software
+    - name: Installing potgresql
+      apt:
+        pkg:
+        - postgresql
+        - python3-pip
+        
+    ## Editing /etc/postgresql/10/main to enable pgsql on all interfaces
+    - name: Modifying postgresql.conf to enable pgsql on all interfaces
+      lineinfile:
+        path: /etc/postgresql/10/main/postgresql.conf
+        insertbefore: '^#listen_addresses'
+        line: listen_addresses = '*'
+
+    - name: Installing necessary pip packages
+      pip:
+        name: psycopg2-binary
+
+    - name: Creating user for NGINX Controller connection
+      become: yes
+      become_user: postgres
+      postgresql_user:
+        name: n-controller
+        password: Default1234!
+        role_attr_flags: CREATEDB
+
+    - name: Permit access to DB from networks in 10.0.0.0/8 address space
+      lineinfile:
+        path: /etc/postgresql/10/main/pg_hba.conf
+        insertafter: 'host    all             all             127.0.0.1/32            md5'
+        line:        'host    all             all             10.0.0.0/8              md5'
+
+    - name: Restart service postgresql
+      service:
+        name: postgresql
+        state: restarted
+
+## Installing NGINX Controller
+- hosts: nginx-controller
+  remote_user: root
+  tasks:
+
+    - name: Upgrading all packages to the latest version
+      apt:
+        update_cache: yes
+        upgrade: dist
+
+    - name: setting hostname
+      template:
+        src: hostname.j2
+        dest: /etc/hostname
+
+    - name: Enable rc.local
+      template:
+        src: rc.local.j2
+        dest: /etc/rc.local
+        mode: '0755'
+
+    - name: Executing /etc/rc.local
+      command: /etc/rc.local
+
+    ## Installing needed software
+    - name: Installing jq, postgresql-client, apt-transport-https, ca-certificates, curl, software-properties-common
+      apt:
+        pkg:
+        - postgresql-client
+        - jq 
+        - apt-transport-https 
+        - ca-certificates 
+        - curl 
+        - software-properties-common
+
+    ## Installing Docker CE
+    - name: adding Docker apt-key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: adding Docker's APT repository
+      apt_repository:
+       repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable
+       state: present
+       filename: 'docker-ce'
+
+    - name: installing docker-ce
+      apt:
+        name: docker-ce
+        state: present
+        update_cache: true
+    
+    - name: Adding ububtu user to docekr group
+      command: usermod -aG docker ubuntu
+
+    - name: Copying Docker's daemon.json file
+      copy:
+        src: ncontroller-files/etc-docker-daemon.json
+        dest: /etc/docker/daemon.json
+
+    - name: Restart service Docker
+      service:
+        name: docker
+        state: restarted
+
+    - name: Copying NGINX controller wrapper
+      copy:
+        src: ncontroller-files/install-controller.sh
+        dest: /home/ubuntu/controller-installer/install-controller.sh
+        owner: ubuntu
+        group: ubuntu
+        mode: '0755'
+
+    - name: Reboot nginx-controller  and wait for it to restart
+      reboot:
+        msg: "Reboot initiated by Ansible"
+        connect_timeout: 5
+        reboot_timeout: 600
+        pre_reboot_delay: 0
+        post_reboot_delay: 30
+        test_command: whoami
+          
+    ## Installing the NGINX Controller
+    - name: Installing NGINX controller
+      command: /home/ubuntu/controller-installer/install-controller.sh
+      args: 
+        chdir: /home/ubuntu/controller-installer/

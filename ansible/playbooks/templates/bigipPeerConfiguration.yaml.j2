@@ -1,0 +1,7 @@
+apiVersion: projectcalico.org/v3
+kind: BGPPeer
+metadata:
+  name: bgppeer-global-bigip-security
+spec:
+  peerIP: {{ hostvars['bigip-security'].bgp_peer_self_ip }}
+  asNumber: 64512

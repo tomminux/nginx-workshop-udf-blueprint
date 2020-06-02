@@ -19,6 +19,9 @@ k8s-master ansible_host=10.1.1.5 secondNetIf_name=eth1 secondNetIf_ip=10.1.20.60
 k8s-node1 ansible_host=10.1.1.6 secondNetIf_name=eth1 secondNetIf_ip=10.1.20.61 hostname=k8s-node1
 k8s-node2 ansible_host=10.1.1.7 secondNetIf_name=eth1 secondNetIf_ip=10.1.20.62 hostname=k8s-node2
 
+[bigip_ndoes]
+bigip-security ansible_host=10.1.1.9 bgp_peer_self_ip=10.1.20.9
+
 [k8s_allnodes:children]
 k8s_masters
 k8s_nodes
