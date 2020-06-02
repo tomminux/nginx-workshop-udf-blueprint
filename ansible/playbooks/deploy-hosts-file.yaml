@@ -1,0 +1,13 @@
+## ----------------------------------------------------------------------------
+## ..:: Deploying hosts file on all nodes ::..
+## ----------------------------------------------------------------------------
+
+## Deploying hosts file on all nodes
+- hosts: all
+  remote_user: root
+  tasks:
+
+    - name: Copy hosts file on cluster's master and nodes
+      copy:
+        src: hosts
+        dest: /etc/hosts

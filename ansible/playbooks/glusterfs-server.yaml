@@ -1,0 +1,47 @@
+## ----------------------------------------------------------------------------
+## ..:: glusterfs-server installation ::..
+## ----------------------------------------------------------------------------
+
+- hosts: glusterfs-server
+  remote_user: root
+  tasks:
+
+    - name: Upgrading all packages to the latest version
+      apt:
+        update_cache: yes
+        upgrade: dist
+
+    - name: Copy hosts file
+      copy:
+        src: hosts
+        dest: /etc/hosts
+
+    - name: Set timezone to Europe/Rome
+      timezone:
+        name: Europe/Rome
+
+    ## Installing a bunch of needed software
+    ## ------------------------------------- 
+    - name: Installing glusterfs-client glusterfs-common glusterfs-server
+      apt:
+        pkg:
+        - glusterfs-client
+        - glusterfs-common
+        - glusterfs-server
+
+    - name: Creating GlusterFS Directories 
+      file:
+        path: /usr/local/share/gv
+        state: directory
+
+    - name: Starting service GlusterFS
+      service:
+        name: glusterd
+        state: started
+
+    - name: GlusterFS Volume k8s-udf-storage initialization
+      command: gluster volume create k8s-udf-storage glfs.f5-udf.com:/usr/local/share/gv/k8s-udf-storage force
+
+    - name: Starting GlusterFS Volume k8s-udf-storage 
+      command: gluster volume start k8s-udf-storage
+
