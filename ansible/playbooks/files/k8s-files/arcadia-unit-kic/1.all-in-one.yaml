@@ -1,0 +1,194 @@
+## -----------------------------
+## ..:: Main app in Arcadia ::..
+## -----------------------------
+apiVersion: v1
+kind: Service
+metadata:
+  name: main
+  namespace: arcadia
+  labels:
+    app: main
+spec:
+  type: ClusterIP
+  ports:
+  - name: main-8080
+    port: 8080
+    protocol: TCP
+  selector:
+      app: main
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: main
+  namespace: arcadia
+  labels:
+    app: main
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: main
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: main
+        version: v1
+    spec:
+      containers:
+      - env:
+        - name: service_name
+          value: main
+        image: registry.f5-udf.com:5000/arcadia-unit:main
+        imagePullPolicy: IfNotPresent
+        name: main
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+---
+## --------------------------------
+## ..:: Backend app in Arcadia ::..
+## --------------------------------
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: arcadia
+  name: backend
+  labels:
+    app: backend
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8080
+    app: backend
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: arcadia
+  labels:
+    app: backend
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: backend
+        version: v1
+    spec:
+      containers:
+      - env:
+        - name: service_name
+          value: backend
+        image: registry.f5-udf.com:5000/arcadia-unit:backend
+        imagePullPolicy: IfNotPresent
+        name: backend
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+---
+## -----------------------------
+## ..:: App2 app in Arcadia ::..
+## -----------------------------
+apiVersion: v1
+kind: Service
+metadata:
+  name: app2
+  namespace: arcadia
+  labels:
+    app: app2
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8080
+    name: app2-80
+  selector:
+    app: app2
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app2
+  namespace: arcadia
+  labels:
+    app: app2
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app2
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: app2
+        version: v1
+    spec:
+      containers:
+      - env:
+        - name: service_name
+          value: app2
+        image: registry.f5-udf.com:5000/arcadia-unit:app2
+        imagePullPolicy: IfNotPresent
+        name: app2
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+---
+## -----------------------------
+## ..:: App3 app in Arcadia ::..
+## -----------------------------
+apiVersion: v1
+kind: Service
+metadata:
+  name: app3
+  namespace: arcadia
+  labels:
+    app: app3
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8080
+    name: app3-80
+  selector:
+    app: app3
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app3
+  namespace: arcadia
+  labels:
+    app: app3
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app3
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: app3
+        version: v1
+    spec:
+      containers:
+      - env:
+        - name: service_name
+          value: app3
+        image: registry.f5-udf.com:5000/arcadia-unit:app3
+        imagePullPolicy: IfNotPresent
+        name: app3
+        ports:
+        - containerPort: 8080
+          protocol: TCP
