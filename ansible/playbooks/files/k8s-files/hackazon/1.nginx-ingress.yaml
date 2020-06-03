@@ -286,7 +286,7 @@ data:
                         "class": "Service_HTTP",
                         "remark": "nginx-ingress-80",
                         "virtualAddresses": [
-                            "10.1.10.100"
+                            "10.1.10.101"
                         ],
                         "pool": "nginx-ingress-pool-80"
                     },
@@ -310,7 +310,7 @@ data:
                         "class": "Service_HTTP",
                         "remark": "nginx-ingress-443",
                         "virtualAddresses": [
-                            "10.1.10.100"
+                            "10.1.10.101"
                         ],
                         "virtualPort": 443,
                         "pool": "nginx-ingress-pool-443"
