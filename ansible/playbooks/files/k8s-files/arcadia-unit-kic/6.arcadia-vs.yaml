@@ -4,7 +4,7 @@ metadata:
   name: arcadia-vs
   namespace: arcadia
 spec:
-  host: arcadia.local
+  host: arcadia.f5-udf.com
   upstreams:
   - name: arcadia-main
     service: main
