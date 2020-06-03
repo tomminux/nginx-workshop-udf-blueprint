@@ -11,8 +11,11 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-  - port: 8080
-    app: backend
+  - name: backend-8080
+    port: 8080
+    protocol: TCP
+  selector:
+      app: backend
 ---
 apiVersion: apps/v1
 kind: Deployment

@@ -11,10 +11,11 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-  - port: 8080
-    name: app2-80
+  - name: app2-8080
+    port: 8080
+    protocol: TCP
   selector:
-    app: app2
+      app: app2
 ---
 apiVersion: apps/v1
 kind: Deployment
