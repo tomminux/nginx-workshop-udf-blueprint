@@ -1,0 +1,78 @@
+## ----------------------------------------------------------------------------
+## ..:: Dockerhost Servers Installation ::..
+## ----------------------------------------------------------------------------
+
+- hosts: dockerhost_servers
+  remote_user: root
+  tasks:
+
+    - name: Set timezone to Europe/Rome
+      timezone:
+        name: Europe/Rome
+
+    - name: Upgrading all packages to the latest version
+      apt:
+        update_cache: yes
+        upgrade: dist
+
+    - name: Copy hosts file
+      copy:
+        src: hosts
+        dest: /etc/hosts
+
+    - name: setting hostname
+      template:
+        src: hostname.j2
+        dest: /etc/hostname
+
+    - name: Enable rc.local
+      template:
+        src: rc.local.j2
+        dest: /etc/rc.local
+        mode: '0755'
+
+    - name: Reboot host and wait for it to restart
+      reboot:
+        msg: "Reboot initiated by Ansible"
+        connect_timeout: 5
+        reboot_timeout: 600
+        pre_reboot_delay: 0
+        post_reboot_delay: 30
+        test_command: whoami
+
+    ## Installing ..:: Docker CE ::..
+    ## ------------------------------
+    - name: adding Docker apt-key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: adding Docker's APT repository
+      apt_repository:
+       repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable
+       state: present
+       filename: 'docker-ce'
+
+    - name: installing docker-ce
+      apt:
+        name: docker-ce
+        state: present
+        update_cache: true
+    
+    - name: Adding ububtu user to docker group
+      command: usermod -aG docker ubuntu
+
+    - name: Configure Docker to use a self signed certificate with local Registry
+      lineinfile: 
+        dest: /lib/systemd/system/docker.service
+        regexp: '^ExecStart' 
+        line: 'ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --insecure-registry registry.f5-udf.com:5000'
+        backrefs: yes
+
+    - name: Restart service Docker - Reload files
+      command: systemctl daemon-reload
+
+    - name: Restart service Docker
+      service:
+        name: docker
+        state: restarted
