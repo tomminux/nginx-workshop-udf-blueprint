@@ -18,6 +18,7 @@ ff02::3 ip6-allhosts
 10.1.1.10       win-jumphost-mgmt.f5-udf.com            win-jumphost-mgmt
 10.1.1.11       nginx-plus-1-mgmt.f5-udf.com            nginx-plus-1-mgmt
 10.1.1.12       nginx-plus-2-mgmt.f5-udf.com            nginx-plus-2-mgmt
+10.1.1.13       dockerhost-server-mgmt.f5-udf.com       dockerhost-server-mgmt
 
 # External Network
 10.1.10.9       bigip-security.internal.f5-udf.com      bigip-security.internal
@@ -26,7 +27,7 @@ ff02::3 ip6-allhosts
 10.1.10.12      nginx-plus-2-external.f5-udf.com        nginx-plus-2-external
 10.1.10.100     bigip-vs100.f5-udf.com                  bigip-vs100
 10.1.10.100     hackazon.f5-udf.com                     hackazon
-10.1.10.100     arcadia.f5-udf.com                       arcadia
+10.1.10.100     arcadia.f5-udf.com                      arcadia
 10.1.10.101     bigip-vs101.f5-udf.com                  bigip-vs101
 10.1.10.102     bigip-vs102.f5-udf.com                  bigip-vs102
 10.1.10.103     bigip-vs103.f5-udf.com                  bigip-vs103
@@ -57,4 +58,6 @@ ff02::3 ip6-allhosts
 10.1.20.61      k8s-node1.f5-udf.com                    k8s-node1
 10.1.20.62      k8s-node2.f5-udf.com                    k8s-node2
 10.1.20.70      nginx-controller.f5-udf.com             nginx-controller        
-10.1.20.80      gitlab.f5-udf.com                       gitlab             
+10.1.20.80      gitlab.f5-udf.com                       gitlab   
+10.1.20.90      dockerhost-server.f5-udf.com            dockerhost-server   
+       

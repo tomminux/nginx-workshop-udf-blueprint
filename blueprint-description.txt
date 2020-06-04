@@ -41,8 +41,8 @@ All Ubuntu boxes are accessible through SSH from the blueprint using SSH keys an
 Gitlab and Grafana are all fresh install and will ask for a password definition at first login. 
 
 K8s was configure from the Ansible Playbook to run the CALICO overlay network; BIG-IP was added as a BGP Peer. BGP Configuration for Calico on BIG-IP has been done.
-
 k8s cluster was imported in RancherUI as k8s-udf (look in infra-server description for Rancher credentials)
+A GlusterFS Volume as been setup in infra-server to provide persistence storage to k8s cluster. 
 
 BUILDING THE BLUEPRINT
 
