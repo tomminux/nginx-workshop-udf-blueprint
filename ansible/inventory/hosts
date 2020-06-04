@@ -22,18 +22,19 @@ k8s-master ansible_host=10.1.1.5 secondNetIf_name=eth1 secondNetIf_ip=10.1.20.60
 k8s-node1 ansible_host=10.1.1.6 secondNetIf_name=eth1 secondNetIf_ip=10.1.20.61 hostname=k8s-node1
 k8s-node2 ansible_host=10.1.1.7 secondNetIf_name=eth1 secondNetIf_ip=10.1.20.62 hostname=k8s-node2
 
-[bigip_ndoes]
+[bigip_nodes]
 bigip-security ansible_host=10.1.1.9 bgp_peer_self_ip=10.1.20.9
 
 [k8s_allnodes:children]
 k8s_masters
 k8s_nodes
 
-[telegraf_nodes:children]
-infra_server
-nginx_controller_servers
-glusterfs_servers
-nginx_plus_servers
+[telegraf_nodes]
+infra-server
+nginx-controller
+nginx-plus-1
+nginx-plus-2
+dockerhost-server
 
 
 [k8s_allnodes:vars]

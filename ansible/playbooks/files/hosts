@@ -27,8 +27,7 @@ ff02::3 ip6-allhosts
 10.1.10.12      nginx-plus-2-external.f5-udf.com        nginx-plus-2-external
 10.1.10.100     bigip-vs100.f5-udf.com                  bigip-vs100
 10.1.10.100     hackazon.f5-udf.com                     hackazon
-10.1.10.100     arcadia.f5-udf.com                      arcadia
-10.1.10.101     bigip-vs101.f5-udf.com                  bigip-vs101
+10.1.10.101     arcadia.f5-udf.com                      arcadia
 10.1.10.102     bigip-vs102.f5-udf.com                  bigip-vs102
 10.1.10.103     bigip-vs103.f5-udf.com                  bigip-vs103
 10.1.10.104     bigip-vs104.f5-udf.com                  bigip-vs104
@@ -38,14 +37,20 @@ ff02::3 ip6-allhosts
 10.1.10.108     bigip-vs108.f5-udf.com                  bigip-vs108
 10.1.10.109     bigip-vs109.f5-udf.com                  bigip-vs109
 10.1.10.110     bigip-vs110.f5-udf.com                  bigip-vs110
+10.1.10.200     grafana.f5-udf.com                      grafana
+10.1.10.201     prometheus.f5-udf.com                   prometheus
+10.1.10.202     rancher.f5-udf.com                      rancher
+10.1.10.203     gitlab.f5-udf.com                       gitlab
+10.1.10.204     graphite.f5-udf.com                     graphite
+10.1.10.205     nginx-controller.f5-udf.com             nginx-controller
 
 # Internal Network
 10.1.20.9       bigip-security.external.f5-udf.com      bigip-security.external
 10.1.20.10      win-jumphost-internal.f5-udf.com        win-jumphost-internal
-10.1.10.11      nginx-plus-1-internal.f5-udf.com        nginx-plus-1-internal
-10.1.20.11      grafana.f5-udf.com                      grafana
-10.1.20.11      prometheus.f5-udf.com                      grafana
+10.1.20.11      nginx-plus-1-internal.f5-udf.com        nginx-plus-1-internal
 10.1.10.12      nginx-plus-2-internal.f5-udf.com        nginx-plus-2-internal
+10.1.20.20      grafana.f5-udf.com                      grafana
+10.1.20.20      prometheus.f5-udf.com                      grafana
 10.1.20.20      infra-server.f5-udf.com                 infra-server
 10.1.20.20      grafana-host.f5-udf.com                 grafana-host
 10.1.20.20      prometheus-host.f5-udf.com              prometheus-host
@@ -53,11 +58,11 @@ ff02::3 ip6-allhosts
 10.1.20.20      glfs.f5-udf.com                         glfs
 10.1.20.30      registry.f5-udf.com                     registry
 10.1.20.40      pg-sql-server.f5-udf.com                pgsql-server        
-10.1.20.50      rancher.f5-udf.com                      rancher       
+10.1.20.50      rancher-host.f5-udf.com                 rancher-host       
 10.1.20.60      k8s-master.f5-udf.com                   k8s-master                     
 10.1.20.61      k8s-node1.f5-udf.com                    k8s-node1
 10.1.20.62      k8s-node2.f5-udf.com                    k8s-node2
-10.1.20.70      nginx-controller.f5-udf.com             nginx-controller        
-10.1.20.80      gitlab.f5-udf.com                       gitlab   
+10.1.20.70      nginx-controller-host.f5-udf.com        nginx-controller-host        
+10.1.20.80      gitlab-host.f5-udf.com                  gitlab-host   
 10.1.20.90      dockerhost-server.f5-udf.com            dockerhost-server   
        

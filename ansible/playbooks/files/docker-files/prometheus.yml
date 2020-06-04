@@ -24,3 +24,23 @@ scrape_configs:
   static_configs:
   - targets:
     - 10.1.20.20:9126
+- job_name: 'dockerhost-server-telegraf'
+  scrape_interval: 10s
+  static_configs:
+  - targets:
+    - 10.1.20.90:9126
+- job_name: 'nginx-plus-1-telegraf'
+  scrape_interval: 10s
+  static_configs:
+  - targets:
+    - 10.1.20.11:9126
+- job_name: 'nginx-plus-2-telegraf'
+  scrape_interval: 10s
+  static_configs:
+  - targets:
+    - 10.1.20.12:9126
+- job_name: 'nginx-controller-telegraf'
+  scrape_interval: 10s
+  static_configs:
+  - targets:
+    - 10.1.20.70:9126

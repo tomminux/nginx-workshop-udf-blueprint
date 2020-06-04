@@ -44,6 +44,13 @@ K8s was configure from the Ansible Playbook to run the CALICO overlay network; B
 k8s cluster was imported in RancherUI as k8s-udf (look in infra-server description for Rancher credentials)
 A GlusterFS Volume as been setup in infra-server to provide persistence storage to k8s cluster. 
 
+There is a Linux server called "dockerhost-server" which can be dedicated to run siloed application (emulating three tiers with docker containers). Docker is already installed there.
+
+Every linux host of this blueprint (but the three nodes of the k8s cluster) is running the Telegraf Agent to collect unix/network statistics and to provide them through a Prometheus exporter.
+Prometheus was configure to scrape all these linux boxes on their IP on port 9126
+
+
+
 BUILDING THE BLUEPRINT
 
 A document with a complete set of instractions on how to build this blueprint through Ansible playbooks is available at this address: https://github.com/tomminux/nginx-workshop-udf-blueprint/blob/master/README.md
