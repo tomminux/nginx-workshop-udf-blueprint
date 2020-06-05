@@ -29,3 +29,9 @@ From UDF, through the BIG-IP component, connect and login with admin user to the
 Now click on the "Project: Hackazon", Resources -> Workloads and select the "Import YAML" button. Select "Namespace: Import all resources into a specific namespace", Click on "Read from a File" and select the file "1.nginx-kic.yaml" from the just cloned repository.
 
 Repeat the procedure to import the "2.hackazon.yaml" file 
+
+## Checks
+
+- In the Rancher UI, multiple pods will appear. 
+- In BIG-IP TMUI, nginx-ingres VSes should appear under Virtual Servers -> hackazon partition. They should be green and they should have a pool resource with 2 pool members, corresponding to the two pods running NGINX KIC for this Namespace.
+- From win-jumphost, open chrome and try to connect to http://hackazon.f5-udf.com
