@@ -19,6 +19,7 @@ ff02::3 ip6-allhosts
 10.1.1.11       nginx-plus-1-mgmt.f5-udf.com            nginx-plus-1-mgmt
 10.1.1.12       nginx-plus-2-mgmt.f5-udf.com            nginx-plus-2-mgmt
 10.1.1.13       dockerhost-server-mgmt.f5-udf.com       dockerhost-server-mgmt
+10.1.1.14       linux-jumphost-mgmt.f5-udf.com          linux-jumphost
 
 # External Network
 10.1.10.9       bigip-security.internal.f5-udf.com      bigip-security.internal
@@ -48,9 +49,8 @@ ff02::3 ip6-allhosts
 10.1.20.9       bigip-security.external.f5-udf.com      bigip-security.external
 10.1.20.10      win-jumphost-internal.f5-udf.com        win-jumphost-internal
 10.1.20.11      nginx-plus-1-internal.f5-udf.com        nginx-plus-1-internal
-10.1.10.12      nginx-plus-2-internal.f5-udf.com        nginx-plus-2-internal
-10.1.20.20      grafana.f5-udf.com                      grafana
-10.1.20.20      prometheus.f5-udf.com                      grafana
+10.1.20.12      nginx-plus-2-internal.f5-udf.com        nginx-plus-2-internal
+10.1.20.14      linux-jumphost-internal.f5-udf.com      linux-jumphost-internal
 10.1.20.20      infra-server.f5-udf.com                 infra-server
 10.1.20.20      grafana-host.f5-udf.com                 grafana-host
 10.1.20.20      prometheus-host.f5-udf.com              prometheus-host
@@ -64,5 +64,4 @@ ff02::3 ip6-allhosts
 10.1.20.62      k8s-node2.f5-udf.com                    k8s-node2
 10.1.20.70      nginx-controller-host.f5-udf.com        nginx-controller-host        
 10.1.20.80      gitlab-host.f5-udf.com                  gitlab-host   
-10.1.20.90      dockerhost-server.f5-udf.com            dockerhost-server   
-       
+10.1.20.90      dockerhost-server.f5-udf.com            dockerhost-server

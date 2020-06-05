@@ -15,6 +15,9 @@ nginx-plus-2 ansible_host=10.1.1.12 secondNetIf_name=eth1 secondNetIf_ip=10.1.20
 [dockerhost_servers]
 dockerhost-server ansible_host=10.1.1.13 secondNetIf_name=eth1 secondNetIf_ip=10.1.20.90 hostname=dockerhost-server
 
+[jumphost_servers]
+linux-jumphost ansible_host=10.1.1.14 secondNetIf_name=eth1 secondNetIf_ip=10.1.20.14 hostname=linux-jumphost
+
 [k8s_masters]
 k8s-master ansible_host=10.1.1.5 secondNetIf_name=eth1 secondNetIf_ip=10.1.20.60 hostname=k8s-master
 
@@ -35,6 +38,7 @@ nginx-controller
 nginx-plus-1
 nginx-plus-2
 dockerhost-server
+linux-jumphost
 
 
 [k8s_allnodes:vars]
@@ -44,6 +48,9 @@ ansible_python_interpreter=/usr/bin/python3
 ansible_python_interpreter=/usr/bin/python3
 
 [dockerhost_servers:vars]
+ansible_python_interpreter=/usr/bin/python3
+
+[jumphost_servers:vars]
 ansible_python_interpreter=/usr/bin/python3
 
 [nginx_controller_servers:vars]
