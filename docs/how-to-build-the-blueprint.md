@@ -2,7 +2,7 @@
     
 ## Introduction
 
-To be completed
+This document explains how to build the NGINX Workshop UDF Blueprint from scratch.
 
 ## ..:: infra-server ::.. Initial configuration 
 
