@@ -26,9 +26,8 @@ ff02::3 ip6-allhosts
 10.1.10.10      win-jumphost-external.f5-udf.com        win-jumphost-external
 10.1.10.11      nginx-plus-1-external.f5-udf.com        nginx-plus-1-external
 10.1.10.12      nginx-plus-2-external.f5-udf.com        nginx-plus-2-external
-10.1.10.100     bigip-vs100.f5-udf.com                  bigip-vs100
-10.1.10.100     hackazon.f5-udf.com                     hackazon
-10.1.10.101     arcadia.f5-udf.com                      arcadia
+10.1.10.100     arcadia.f5-udf.com                      arcadia
+10.1.10.101     hackazon.f5-udf.com                     hackazon
 10.1.10.102     bigip-vs102.f5-udf.com                  bigip-vs102
 10.1.10.103     bigip-vs103.f5-udf.com                  bigip-vs103
 10.1.10.104     bigip-vs104.f5-udf.com                  bigip-vs104
