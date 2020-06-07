@@ -19,7 +19,7 @@ Connect to infra-server via ssh and execute
     cd blog-apps/wordpress
     curl -O https://wordpress.org/latest.tar.gz
     tar xzf latest.tar.gz
-    chown -R 999:999 hackazon
+    chown -R 999:999 wordpress
 
 ## Creating the Projetc and the Namespace for Hackazon
 
