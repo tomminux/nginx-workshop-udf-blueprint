@@ -262,7 +262,7 @@ spec:
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: f5-to-nginx-ingress
+  name: arcadia-f5-to-kic
   namespace: arcadia
   labels:
     f5type: virtual-server
