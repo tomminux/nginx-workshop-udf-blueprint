@@ -218,13 +218,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-ingress-80
+  name: arcadia-kic-80
   namespace: arcadia
   labels:
     app: nginx-ingress
     cis.f5.com/as3-tenant: arcadia
-    cis.f5.com/as3-app: nginx-ingress-80
-    cis.f5.com/as3-pool: nginx-ingress-pool-80
+    cis.f5.com/as3-app: arcadia-kic-80
+    cis.f5.com/as3-pool: arcadia-kic-pool-80
 spec:
   type: ClusterIP
   ports:
@@ -240,13 +240,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-ingress-443
+  name: arcadia-kic-443
   namespace: arcadia
   labels:
     app: nginx-ingress
     cis.f5.com/as3-tenant: arcadia
-    cis.f5.com/as3-app: nginx-ingress-443
-    cis.f5.com/as3-pool: nginx-ingress-pool-443
+    cis.f5.com/as3-app: arcadia-kic-443
+    cis.f5.com/as3-pool: arcadia-kic-pool-443
 spec:
   type: ClusterIP
   ports:
@@ -279,18 +279,18 @@ data:
             "remark": "A1 Template",
             "arcadia": {
                 "class": "Tenant",
-                "nginx-ingress-80": {
+                "arcadia-kic-80": {
                     "class": "Application",
                     "template": "generic",
-                    "nginx-ingress-80-vs": {
+                    "arcadia-kic-80-vs": {
                         "class": "Service_HTTP",
-                        "remark": "nginx-ingress-80",
+                        "remark": "arcadia-kic-80",
                         "virtualAddresses": [
                             "10.1.10.100"
                         ],
-                        "pool": "nginx-ingress-pool-80"
+                        "pool": "arcadia-kic-pool-80"
                     },
-                    "nginx-ingress-pool-80": {
+                    "arcadia-kic-pool-80": {
                         "class": "Pool",
                         "monitors": [
                             "http"
@@ -303,19 +303,19 @@ data:
                         ]
                     }
                 },
-                "nginx-ingress-443": {
+                "arcadia-kic-443": {
                     "class": "Application",
                     "template": "generic",
-                    "nginx-ingress-443-vs": {
+                    "arcadia-kic-443-vs": {
                         "class": "Service_HTTP",
-                        "remark": "nginx-ingress-443",
+                        "remark": "arcadia-kic-443",
                         "virtualAddresses": [
                             "10.1.10.100"
                         ],
                         "virtualPort": 443,
-                        "pool": "nginx-ingress-pool-443"
+                        "pool": "arcadia-kic-pool-443"
                     },
-                    "nginx-ingress-pool-443": {
+                    "arcadia-kic-pool-443": {
                         "class": "Pool",
                         "monitors": [
                             "https"
