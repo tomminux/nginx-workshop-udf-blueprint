@@ -21,6 +21,19 @@ Connect to infra-server via ssh and execute
     tar xzf latest.tar.gz
     chown -R 999:999 wordpress
 
+## Build the Wordpress on NGINX Unit Docker Container and push it to the local registry
+We need to build the docker container starting from NGINX Unit and hosting worpress code; go to infra-server and clone the wordpress-k8s repository with NGINX Unit base:
+
+   git clone https://github.com/tomminux/wordpress-k8s.git
+
+and now build the docker container for Wordpress on NGINX Unit:
+
+    cd ~/wordpress-k8s/docker-build
+    docker build . -t registry.f5-udf.com:5000/wordpress:unit
+    docker push registry.f5-udf.com:5000/wordpress:unit
+
+WE are now ready to deploy the app in Kubernetes.
+
 ## Creating the Projetc and the Namespace for Hackazon
 
 Anywhere on your computer, download YAML files for hackazon deployment:
