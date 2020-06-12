@@ -1,4 +1,4 @@
-# Hackazon - NGINX Kubernetes Ingress Controller and F5 BIG-IP Container Ingress Services
+# Hackazon - NGINX KIC, F5 BIG-IP CIS and NGINX App Protect
 
 ## Description
 With this use case we are going to explore the deployment of a web application in a Kubernetes cluster. Hachazon has two micro-services:
@@ -10,13 +10,34 @@ We are going to deploy the application in our k8s cluster in UDF in a dedicated 
 
 The NGINX KIC will be configured with a BIG-IP VS ConfigMap (AS3 type) to automatically drive the configuration of BIG-IP in order to expose NGINX KIC's pods to the ourside world.
 
-## Preprare k8s storage to host Hackazon Web Content
+Two sub use cases are avaiable here:
+
+- **Standard Hackazon software**: we will run a POD with the standard Hackazon Container 
+- **Hackazon protected by the NGINX App Protect**: we will run a POD with two conftainers, one of them being the standard hackazon software, the other one as a sidecar proxy running NGINX+ with the App Protect module enabled
+
+## Preprare k8s storage to host Hackazon / Hackazon-NAP Web Content
+We need to prepare the storage to allocate the directory structure for this use cases:
+
+````
+/usr/local/share/gv/k8s-udf-srtorage
+    |
+    |-->hackazon
+            |
+            | --> hackazon
+            | --> hackazon-nap
+            | --> mysql             # This directory will be automatically create by the mysql POD
+````
+
 Connect to infra-server via ssh and execute 
 
     sudo su -
     cd /usr/local/share/gv/k8s-udf-storage
+    mkdir hackazon
+    cd hackazon
     git clone https://github.com/rapid7/hackazon.git
-    chown -R www-data:www-data hackazon
+    mv hackazon hackazon-nap
+    git clone https://github.com/rapid7/hackazon.git
+    chown -R www-data:www-data hackazon*
 
 ## Creating the Projetc and the Namespace for Hackazon
 
