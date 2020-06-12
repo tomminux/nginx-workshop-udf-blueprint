@@ -17,6 +17,7 @@ sudo chmod 755 /etc/rc.local
 sudo sh -c 'cat <<EOF > /etc/rc.local
 #!/bin/bash
 ifconfig eth1 10.1.20.20/24 up
+ifconfig eth1:25 10.1.20.25/24 up
 ifconfig eth1:30 10.1.20.30/24 up
 ifconfig eth1:40 10.1.20.40/24 up
 ifconfig eth1:50 10.1.20.50/24 up

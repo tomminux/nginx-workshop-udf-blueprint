@@ -171,6 +171,44 @@
                }]
             }
          },
+         "Jenkins": {
+            "class": "Application",
+            "template": "generic",
+            "Jenkins": {
+               "class": "Service_HTTPS",
+               "virtualAddresses": [
+                  "10.1.10.206"
+               ],
+               "pool": "jenkins_pool",
+               "virtualPort": 443,
+         		"serverTLS": "jenkins_selfsigned"
+             },
+	     "jenkins_selfsigned": {
+                "class": "TLS_Server",
+                "certificates": [
+                   {
+                       "certificate": "jenkins_use_local_default"
+                   }
+                ]
+             },
+             "jenkins_use_local_default": {
+                "class": "Certificate",
+                "certificate": {"bigip":"/Common/default.crt"},
+                "privateKey": {"bigip":"/Common/default.key"}
+             },
+            "jenkins_pool": {
+               "class": "Pool",
+               "monitors": [
+                  "http"
+               ],
+               "members": [{
+                  "servicePort": 80,
+                  "serverAddresses": [
+                     "10.1.20.25"
+                  ]
+               }]
+            }
+         },
           "Graphite": {
              "class": "Application",
              "template": "generic",

@@ -65,3 +65,11 @@ docker run -d \
   -v /home/ubuntu/dockerhost-storage/graphite/data:/opt/graphite/storage \
   -v /home/ubuntu/dockerhost-storage/graphite/statsd-config:/opt/statsd/config \
   graphiteapp/graphite-statsd
+
+  docker run -d \
+        --name f5Jenkins \
+        --restart=always \
+        -p 10.1.20.25:80:8080 \
+        -p 10.1.20.25:50000:50000 \
+        -v /home/ubuntu/dockerhost-storage/jenkins:/var/jenkins_home \
+        jenkins/jenkins:lts

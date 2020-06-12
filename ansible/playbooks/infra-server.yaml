@@ -157,6 +157,14 @@
         owner: ubuntu
         group: ubuntu
     
+    ## JENKINS
+    - name: Jenkins Docker storage configuration
+      file:
+        path: /home/ubuntu/dockerhost-storage/jenkins
+        state: directory
+        owner: ubuntu
+        group: ubuntu
+    
     ## F5-CLI
     - name: F5 CLI Docker storage configuration - f5-cli
       file:
