@@ -1,0 +1,23 @@
+## ----------------------------------------------------------------------------
+## ..:: Deploying hosts file on all nodes ::..
+## ----------------------------------------------------------------------------
+
+## Deploying hosts file on all nodes
+- hosts: all
+  remote_user: root
+  tasks:
+
+    - name: Copy hosts file on all linux hosts
+      copy:
+        src: hosts
+        dest: /etc/hosts
+
+    - name: Remove file (delete file)
+      file:
+        path: /resolv.conf
+        state: absent
+
+    - name: Copy resolv.conf file on all linux hosts
+      copy:
+        src: resolv.conf
+        dest: /etc/resolv.conf
