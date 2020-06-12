@@ -55,7 +55,45 @@ TBC TBC TBC
 
 ### If you are using teh Unix Command Line
 
-TBC TBC TBC
+This section in the documentation is fo the ones that would like to operate on the unic command line from a host that has kubctl rechability to the k8s clustrer.
+Connect to infra-server to the ubunut user with ssh. From there clone the repository 
+
+    cd ~
+    git clone https://github.com/tomminux/hackazon-k8s.git
+
+As a first think we are going to prepare the namespace, CIS and KIC: this will create the namespace and will populate it with the KIC, the CIS, Pv and PVC for file storage and the mysql DB
+
+    cd ~/hackazon-k8s/with-command-line/0.namespace-preparation
+    kubectl apply -f  0.namespace.yaml
+    kubectl apply -f  1.bigip-k8s-ctlr-deployment.yaml
+    kubectl apply -f  2.nginx-kic-cis.yaml
+    kubectl apply -f  3.pv-pvc.yaml
+    kubectl apply -f  4.mysql.yaml
+
+If you want to deploy the standard hackazon (no NGINX App Protect) proceed in the hackazon directory
+
+    cd ~/hackazon-k8s/with-command-line/hackazon
+    kubectl apply -f hackazon.yaml
+
+If you want to deploy the hackazon web site protected with the NGINX App Protect Sidecar Proxy, please proceed to the hackazon-nap directory: 
+
+    cd ~/hackazon-k8s/with-command-line/hackazon-nap
+    
+Since we are going to use NGINX Plus to run the App Protect Module, we need to build NGINX+ Docker Container
+
+    cd 0.docker-build
+
+Copy in this directory your nginx-repo.{key,crt} files and build the container, pushing it to the local UDF Registry:
+
+    docker build . -t registry.f5-udf.com:5000/nginx-nap:latest
+    docker push registry.f5-udf.com:5000/nginx-nap:latest
+
+Once you have the docker image in your UDF registry, you can proceed deploying the protected Hackazon Web Commerce Site:
+
+    kubectl apply -f 1.configmap-nginxconf.yaml
+    kubectl apply -f 2.hackazon-nap.yaml
+
+The Hackazon application is now deployed and available. 
 
 ## Checks
 
