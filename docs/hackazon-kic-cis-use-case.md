@@ -39,7 +39,9 @@ Connect to infra-server via ssh and execute
     git clone https://github.com/rapid7/hackazon.git
     chown -R www-data:www-data hackazon*
 
-## Creating the Projetc and the Namespace for Hackazon
+## Preparing k8s cluster to host Hackazon use cases
+
+### If you are using Rancher UI
 
 Anywhere on your computer, download YAML files for hackazon deployment:
 
@@ -47,9 +49,13 @@ Anywhere on your computer, download YAML files for hackazon deployment:
 
 From UDF, through the BIG-IP component, connect and login with admin user to the Rancher UI, click on k8s-udf kubernetes cluster and on "Projetcs/Namespaces" link. Add a project called "Hackazon" (Add project -> "Hackazon" in the text field -> Create) and the click on the add Namespace button next to "Project: Hackazon". Put "hackazon" in the Name field and click create.
 
-Now click on the "Project: Hackazon", Resources -> Workloads and select the "Import YAML" button. Select "Namespace: Import all resources into a specific namespace", Click on "Read from a File" and select the file "1.nginx-kic.yaml" from the just cloned repository.
+First of all, we need to setup the NGINX Kic è BIG-IP CIS ingegration for the "hackazon" namespace; to do this we need to spin up a k8s-bigip-ctlr pod controller in the kube-system namespace. 
 
-Repeat the procedure to import the "2.hackazon.yaml" file 
+TBC TBC TBC 
+
+### If you are using teh Unix Command Line
+
+TBC TBC TBC
 
 ## Checks
 
