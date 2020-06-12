@@ -47,11 +47,24 @@ Anywhere on your computer, download YAML files for hackazon deployment:
 
     git clone https://github.com/tomminux/hackazon-k8s.git
 
-From UDF, through the BIG-IP component, connect and login with admin user to the Rancher UI, click on k8s-udf kubernetes cluster and on "Projetcs/Namespaces" link. Add a project called "Hackazon" (Add project -> "Hackazon" in the text field -> Create) and the click on the add Namespace button next to "Project: Hackazon". Put "hackazon" in the Name field and click create.
+From UDF, through the BIG-IP component, connect and login with admin user to the Rancher UI, click on k8s-udf kubernetes cluster and on "Projetcs/Namespaces" link. Add a project called "E-Commerce" (Add project -> "E-Commerce" in the text field -> Create) and the click on the add Namespace button next to "Project: E-Commerce". Put "hackazon" in the Name field and click create.
 
-First of all, we need to setup the NGINX Kic è BIG-IP CIS ingegration for the "hackazon" namespace; to do this we need to spin up a k8s-bigip-ctlr pod controller in the kube-system namespace. 
+First of all, we need to setup the NGINX Kic and BIG-IP CIS ingegration for the "hackazon" namespace; to do this we need to spin up a k8s-bigip-ctlr pod controller in the kube-system namespace. Go to the System Project in Rancher and, selecting the **kube-system**, import the 1.bigip-k8s-ctlr-deployment.yaml file
 
-TBC TBC TBC 
+We are now ready to deploy the NGINX Kubernetes Ingress Controller. From the main Projects/Namespaces link, click on the "Project: E-Commerce" link and on the "Import YAML" button. Import the file 2.environment-preparation.yaml, this will spin up the NGINX KIC, the Persistent Volume and the mysql needed to operate hackazon. 
+
+If you want to spin up the plan Hackazon Commerce site, import the file hackazon.yaml in the 3a.hackazon directory
+
+If you want to operate the hackazon e-commerce site with the application security provided by NGINX App Protect, you need to build the NGINX+ Sidecar Proxy before; move to the right directory:
+    
+    cd ~/hackazon-k8s/with-rancher/3b.hackazon-nap/0.docker-build
+
+Copy in this directory your nginx-repo.{key,crt} files and build the container, pushing it to the local UDF Registry:
+
+    docker build . -t registry.f5-udf.com:5000/nginx-nap:latest
+    docker push registry.f5-udf.com:5000/nginx-nap:latest
+
+You are now ready to spin up the Hackazon-Nap POD with the two containers: go to Rancher and import the hackazon-nap.yaml file.
 
 ### If you are using teh Unix Command Line
 
