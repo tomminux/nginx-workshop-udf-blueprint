@@ -13,6 +13,11 @@
             "consoleInactivityTimeout": 1200,
             "autoPhonehome": false
         },
+        "myLicense": {
+            "class": "License",
+            "licenseType": "regKey",
+            "regKey": "W9119-67335-42661-76661-8946042"
+        },
         "myDns": {
             "class": "DNS",
             "nameServers": [

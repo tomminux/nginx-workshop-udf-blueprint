@@ -1,0 +1,57 @@
+$ORIGIN .
+$TTL 3600       ; 1 hour
+f5-udf.com              IN SOA  bigip-security-external.f5-udf.com. hostmaster.bigip-security-external.f5-udf.com. (
+                                2020061204 ; serial
+                                10800      ; refresh (3 hours)
+                                3600       ; retry (1 hour)
+                                604800     ; expire (1 week)
+                                86400      ; minimum (1 day)
+                                )
+                        NS      bigip-security-external.f5-udf.com.
+$ORIGIN f5-udf.com.
+bigip-security-external A       10.1.10.105
+$TTL 60 ; 1 minute
+bigip-security-external-selfip A 10.1.10.9
+bigip-security-internal-selfip A 10.1.20.9
+bigip-security-mgmt     A       10.1.1.9
+dockerhost-server       A       10.1.20.90
+dockerhost-server-mgmt  A       10.1.1.13
+gitlab                  A       10.1.10.203
+gitlab-host             A       10.1.20.80
+glfs                    A       10.1.20.20
+grafana                 A       10.1.10.200
+grafana-host            A       10.1.20.20
+graphite                A       10.1.10.204
+graphite-host           A       10.1.20.20
+infra-server            A       10.1.20.20
+infra-server-mgmt       A       10.1.1.4
+jenkins                 A       10.1.10.206
+jenkins-host            A       10.1.20.25
+k8s-master              A       10.1.20.60
+k8s-master-mgmt         A       10.1.1.5
+k8s-node1               A       10.1.20.61
+k8s-node1-mgmt          A       10.1.1.6
+k8s-node2               A       10.1.20.62
+k8s-node2-mgmt          A       10.1.1.7
+linux-jumphost          A       10.1.1.14
+linux-jumphost-internal A       10.1.20.14
+nginx-controller        A       10.1.10.205
+nginx-controller-host   A       10.1.20.70
+nginx-controller-mgmt   A       10.1.1.8
+nginx-plus-1-external   A       10.1.10.11
+nginx-plus-1-internal   A       10.1.20.11
+nginx-plus-1-mgmt       A       10.1.1.11
+nginx-plus-2-external   A       10.1.10.12
+nginx-plus-2-internal   A       10.1.20.12
+nginx-plus-2-mgmt       A       10.1.1.12
+nginx-plus-1            CNAME   nginx-plus-1-internal
+nginx-plus-2            CNAME   nginx-plus-2-internal
+pgsql-server            A       10.1.20.40
+prometheus              A       10.1.10.201
+prometheus-host         A       10.1.20.20
+rancher                 A       10.1.10.202
+rancher-host            A       10.1.20.50
+registry                A       10.1.20.30
+win-jumphost-external   A       10.1.10.10
+win-jumphost-internal   A       10.1.20.10
+win-jumphost-mgmt       A       10.1.1.10
