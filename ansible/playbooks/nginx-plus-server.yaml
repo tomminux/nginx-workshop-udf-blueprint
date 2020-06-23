@@ -20,11 +20,6 @@
         src: hosts
         dest: /etc/hosts
 
-    - name: Copy resolv.conf file
-      copy:
-        src: resolv.conf
-        dest: /etc/resolv.conf
-
     - name: setting hostname
       template:
         src: hostname.j2
@@ -100,3 +95,8 @@
       service:
         name: nginx
         state: started
+
+    - name: Copy resolv.conf file
+      copy:
+        src: resolv.conf
+        dest: /etc/resolv.conf
