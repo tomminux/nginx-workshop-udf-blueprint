@@ -15,11 +15,6 @@
         update_cache: yes
         upgrade: dist
 
-    - name: Copy hosts file
-      copy:
-        src: hosts
-        dest: /etc/hosts
-
     - name: setting hostname
       template:
         src: hostname.j2
@@ -100,3 +95,8 @@
       copy:
         src: resolv.conf
         dest: /etc/resolv.conf
+
+    - name: Copy hosts file
+      copy:
+        src: hosts
+        dest: /etc/hosts
