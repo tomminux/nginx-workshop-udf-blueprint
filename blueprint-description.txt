@@ -9,7 +9,7 @@ This workshop has been developed to assist SEs in building a workshop around NGI
 * NGINX Unit (conteinerized)
 * NGINX Kubernetes Ingress Controller
 * NGINX Plus (LB / Reverse Proxy)
-* NGINX Controller 3.x
+* NGINX Controller 3.5
 * NGINX API Gateway
 * Augmented use case with NGINX KIC and BIG-IP CIS in Calico mode and / or NodePort.
 
@@ -19,7 +19,7 @@ WHAT'S AVAILABLE?
 
 * 3 x Networks (Management, external, internal)
 * 1 x Windows Server Jumhost, with Chrome and Postman installed
-* 1 x BIG-IP called bigip-security (15.0.1)
+* 1 x BIG-IP called bigip-security (15.1.0.4 with BYOL License)
 * 2 x NGINX Plus running on Ubuntu Server 18.04
 * 1 x NGINX Controller running on Ubuntu Server 18.04
 * 1 x k8s CLuster (1 master and 2 nodes, everything built on Ubuntu Server 18.04)
@@ -28,6 +28,7 @@ WHAT'S AVAILABLE?
 Docker is running on infra-server and providing the following functions:
 
 * Gitlab 
+* Jenkins
 * Rancher GUI
 * Private Docker Registry
 * Grafana
