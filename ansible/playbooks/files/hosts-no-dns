@@ -26,19 +26,7 @@ ff02::3 ip6-allhosts
 10.1.10.10      win-jumphost-external.f5-udf.com        win-jumphost-external
 10.1.10.11      nginx-plus-1-external.f5-udf.com        nginx-plus-1-external
 10.1.10.12      nginx-plus-2-external.f5-udf.com        nginx-plus-2-external
-10.1.10.100     arcadia.f5-udf.com                      arcadia
-10.1.10.100     arcadia-unit.udf.f5.com                 arcadia-unit
-10.1.10.101     hackazon.f5-udf.com                     hackazon
-10.1.10.101     hackazon-nap.f5-udf.com                 hackazon-nap
-10.1.10.102     wordpress.f5-udf.com                    wordpress
-10.1.10.103     bigip-vs103.f5-udf.com                  bigip-vs103
-10.1.10.104     bigip-vs104.f5-udf.com                  bigip-vs104
-10.1.10.105     bigip-vs105.f5-udf.com                  bigip-vs105
-10.1.10.106     bigip-vs106.f5-udf.com                  bigip-vs106
-10.1.10.107     bigip-vs107.f5-udf.com                  bigip-vs107
-10.1.10.108     bigip-vs108.f5-udf.com                  bigip-vs108
-10.1.10.109     bigip-vs109.f5-udf.com                  bigip-vs109
-10.1.10.110     bigip-vs110.f5-udf.com                  bigip-vs110
+
 10.1.10.200     grafana.f5-udf.com                      grafana
 10.1.10.201     prometheus.f5-udf.com                   prometheus
 10.1.10.202     rancher.f5-udf.com                      rancher
@@ -58,7 +46,7 @@ ff02::3 ip6-allhosts
 10.1.20.20      prometheus-host.f5-udf.com              prometheus-host
 10.1.20.20      graphite-host.f5-udf.com                graphite-host
 10.1.20.20      glfs.f5-udf.com                         glfs
-10.1.20.25      jenknis.f5-udf.com                       jenkins
+10.1.20.25      jenkins-host.f5-udf.com                       jenkins
 10.1.20.30      registry.f5-udf.com                     registry
 10.1.20.40      pg-sql-server.f5-udf.com                pgsql-server        
 10.1.20.50      rancher-host.f5-udf.com                 rancher-host       

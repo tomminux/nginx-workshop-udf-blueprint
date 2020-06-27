@@ -11,10 +11,10 @@
         update_cache: yes
         upgrade: dist
 
-#    - name: Copy hosts file
-#      copy:
-#        src: hosts
-#        dest: /etc/hosts
+    - name: Copy hosts file
+      copy:
+        src: hosts-no-dns
+        dest: /etc/hosts
 
     - name: Set timezone to Europe/Rome
       timezone:

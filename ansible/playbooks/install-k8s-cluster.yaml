@@ -72,7 +72,7 @@
 
     - name: Copy hosts file on cluster's master and nodes
       copy:
-        src: hosts
+        src: hosts-no-dns
         dest: /etc/hosts
 
     - name: Enable rc.local
