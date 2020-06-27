@@ -4,7 +4,7 @@ sudo ssh-keygen -b 2048 -t rsa
 sudo sh -c 'cp /root/.ssh/id_rsa* /home/ubuntu/.ssh/.'
 sudo chown ubuntu:ubuntu /home/ubuntu/.ssh/id*
 sudo sh -c 'cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys'
-cat .ssh/id_rsa.pub >> .ssh/authorized_keys
+cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 DEBIAN_FRONTEND=noninteractive
 sudo apt update 
 sudo apt upgrade -y

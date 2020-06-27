@@ -13,7 +13,7 @@ This workshop has been developed to assist SEs in building a workshop around NGI
 * NGINX API Gateway
 * Augmented use case with NGINX KIC and BIG-IP CIS in Calico mode and / or NodePort.
 
-For anything related to this blueprint, please get in touch with Paolo Arcagni, p.arcagni@f5.com
+For anything related to this blueprint, please get in touch with Paolo 2Arcagni, p.arcagni@f5.com
 
 WHAT'S AVAILABLE?
 
@@ -21,7 +21,7 @@ WHAT'S AVAILABLE?
 * 1 x Windows Server Jumhost, with Chrome and Postman installed
 * 1 x BIG-IP called bigip-security (15.1.0.4 with BYOL License)
 * 2 x NGINX Plus running on Ubuntu Server 18.04
-* 1 x NGINX Controller running on Ubuntu Server 18.04
+* 1 x NGINX Controller 3.5 running on Ubuntu Server 18.04
 * 1 x k8s CLuster (1 master and 2 nodes, everything built on Ubuntu Server 18.04)
 * 1 x "infra-server", an Ubuntu Server 18.04 Host which is acting as the main control point of the entire Blueprint.
 
