@@ -16,7 +16,7 @@
         "myLicense": {
             "class": "License",
             "licenseType": "regKey",
-            "regKey": "W9119-67335-42661-76661-8946042"
+            "regKey": "xxxxx-xxxxx-xxxxx-xxxxx-xxxxxxx"
         },
         "myDns": {
             "class": "DNS",
@@ -41,7 +41,7 @@
             "class": "Provision",
             "ltm": "nominal",
             "avr": "nominal",
-            "dns": "nominal"
+            "gtm": "nominal"
         },
         "internal": {
             "class": "VLAN",
@@ -52,7 +52,7 @@
         },
         "internal-self": {
             "class": "SelfIp",
-            "address": "10.1.20.10/24",
+            "address": "10.1.20.9/24",
             "vlan": "internal",
             "allowService": "none",
             "trafficGroup": "traffic-group-local-only"
@@ -65,7 +65,7 @@
         },
         "external-self": {
             "class": "SelfIp",
-            "address": "10.1.10.10/24",
+            "address": "10.1.10.9/24",
             "vlan": "external",
             "allowService": "none",
             "trafficGroup": "traffic-group-local-only"

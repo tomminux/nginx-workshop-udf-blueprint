@@ -198,6 +198,11 @@
   remote_user: root
   tasks:
 
+    - name: Creating /etc/calico directory
+      file:
+        path: /etc/calico
+        state: directory
+        
     - name: Getting calico.yaml for Calico overlay Network
       get_url: 
         url: https://docs.projectcalico.org/manifests/calico.yaml

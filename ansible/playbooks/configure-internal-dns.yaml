@@ -14,7 +14,7 @@
 
     - name: Remove file (delete file)
       file:
-        path: /resolv.conf
+        path: /etc/resolv.conf
         state: absent
 
     - name: Copy resolv.conf file on all linux hosts
