@@ -16,12 +16,13 @@ sudo chmod 755 /etc/rc.local
 
 sudo sh -c 'cat <<EOF > /etc/rc.local
 #!/bin/bash
-ifconfig eth1 10.1.20.20/24 up
-ifconfig eth1:25 10.1.20.25/24 up
-ifconfig eth1:30 10.1.20.30/24 up
-ifconfig eth1:40 10.1.20.40/24 up
-ifconfig eth1:50 10.1.20.50/24 up
-ifconfig eth1:80 10.1.20.80/24 up
+ifconfig ens4 10.1.20.20/24 up
+ifconfig ens4:25 10.1.20.25/24 up
+ifconfig ens4:30 10.1.20.30/24 up
+ifconfig ens4:35 10.1.20.35/24 up
+ifconfig ens4:40 10.1.20.40/24 up
+ifconfig ens4:50 10.1.20.50/24 up
+ifconfig ens4:80 10.1.20.80/24 up
 
 ## ..:: Max Map Count for VM when runnign ELK in a Docker container ::..
 sysctl -w vm.max_map_count=262144
