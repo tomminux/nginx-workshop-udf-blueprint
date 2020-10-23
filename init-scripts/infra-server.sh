@@ -22,6 +22,10 @@ ifconfig eth1:30 10.1.20.30/24 up
 ifconfig eth1:40 10.1.20.40/24 up
 ifconfig eth1:50 10.1.20.50/24 up
 ifconfig eth1:80 10.1.20.80/24 up
+
+## ..:: Max Map Count for VM when runnign ELK in a Docker container ::..
+sysctl -w vm.max_map_count=262144
+
 exit 0
 EOF'
 
