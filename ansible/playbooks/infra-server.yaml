@@ -156,7 +156,26 @@
         state: directory
         owner: ubuntu
         group: ubuntu
-    
+        
+    ## ELK
+    - name: ELK Docker storage configuration
+      file:
+        path: /home/ubuntu/dockerhost-storage/elk/{{ item }}
+        state: directory
+        owner: ubuntu
+        group: ubuntu
+      with_items:
+        - logstash
+        - logstash/conf.d
+        - elasticsearch
+
+    - name: Copying ELK Logstash configuration file
+      copy:
+        src: docker-files/30-waf-logs-full-logstash.conf
+        dest: /home/ubuntu/dockerhost-storage/elk/logstash/conf.d/
+        owner: ubuntu
+        group: ubuntu
+
     ## JENKINS
     - name: Jenkins Docker storage configuration
       file:
