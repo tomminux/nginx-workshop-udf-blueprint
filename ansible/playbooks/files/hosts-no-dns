@@ -27,11 +27,10 @@ ff02::3 ip6-allhosts
 10.1.10.12      nginx-plus-2-external.f5-udf.com        nginx-plus-2-external
 
 10.1.10.200     grafana.f5-udf.com                      grafana
-10.1.10.200     elk.f5-udf.com                          elk
 10.1.10.201     prometheus.f5-udf.com                   prometheus
 10.1.10.202     rancher.f5-udf.com                      rancher
 10.1.10.203     gitlab.f5-udf.com                       gitlab
-10.1.10.204     graphite.f5-udf.com                     graphite
+10.1.10.204     elk.f5-udf.com                           elk
 10.1.10.205     nginx-controller.f5-udf.com             nginx-controller
 10.1.10.206     jenkins.f5-udf.com                      jenkins
 
