@@ -17,6 +17,14 @@ docker run -d \
     -e REGISTRY_HTTP_TLS_KEY=/certs/registry.key \
     -e REGISTRY_HTTP_ADDR=0.0.0.0:5000 \
     registry:2
+    
+docker run -d \
+  --restart=always \
+  --name f5ELK \
+  -p 10.1.20.20:9200:9200 -p 10.1.20.20:5601:5601 -p 10.1.20.20:5144:5144 \
+  -v /home/ubuntu/dockerhost-storage/elk/logstash/conf.d:/etc/logstash/conf.d \
+  -v /home/ubuntu/dockerhost-storage/elk/elasticsearch:/var/lib/elasticsearch \
+  sebp/elk:740
 
 docker run -d \
   --hostname gitlab.f5-udf.com \
