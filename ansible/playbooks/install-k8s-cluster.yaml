@@ -70,10 +70,20 @@
         name: kubectl
         state: present
 
-    - name: Copy hosts file on cluster's master and nodes
+#    - name: Copy hosts file on cluster's master and nodes
+#      copy:
+#        src: hosts-no-dns
+#        dest: /etc/hosts
+
+    - name: Remove resolv.conf link
+      file:
+        path: /etc/resolv.conf
+        state: absent
+
+    - name: Copy resolv.conf file on cluster's master and nodes
       copy:
-        src: hosts-no-dns
-        dest: /etc/hosts
+        src: resolv.conf
+        dest: /etc/resolv.conf
 
     - name: Enable rc.local
       template:
