@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo apt install -y apt-transport-https ca-certificates curl software-properties-common xubuntu-desktop
+sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
 
 ## ..:: Installing dnsmasq ::..
 sudo rm /etc/resolv.conf
