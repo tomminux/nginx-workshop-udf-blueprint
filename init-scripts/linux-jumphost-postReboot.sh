@@ -57,4 +57,11 @@ wget https://dl.google.com/linux/linux_signing_key.pub
 sudo apt-key add linux_signing_key.pub
 sudo apt update
 sudo apt install google-chrome-stable
+rm https://dl.google.com/linux/linux_signing_key.pub
 
+## ..:: Postman installation ::..
+
+wget https://dl.pstmn.io/download/latest/linux64
+sudo mkdir /usr/local/src/postman
+sudo tar xf linux64 -C /usr/local/src/postman
+sudo ln -s /usr/local/src/postman/Postman/Postman /usr/local/bin/postman
