@@ -97,6 +97,8 @@
         - ca-certificates 
         - curl 
         - software-properties-common
+        - socat
+        - conntrack
 
     ## Installing Docker CE
     - name: adding Docker apt-key
