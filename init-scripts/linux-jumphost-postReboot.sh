@@ -2,9 +2,23 @@
 
 sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
 
-## ..:: Installing dnsmasq ::..
+## ..:: Setting DNS Resolution for this UDF Deployment ::..
 sudo rm /etc/resolv.conf
-sudo sh -c 'echo "10.1.1.10 linux-jumphost >> /etc/hosts"'
+
+sudo sh -c 'cat <<EOF > /etc/hosts
+127.0.0.1 localhost
+
+# The following lines are desirable for IPv6 capable hosts
+::1 ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+ff02::3 ip6-allhosts
+
+10.1.1.10 linux-jumphost
+EOF'
+
 sudo sh -c 'cat <<EOF > /etc/resolv.conf
 search f5-udf.com
 nameserver 10.1.1.4
