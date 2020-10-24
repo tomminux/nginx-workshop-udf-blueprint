@@ -42,4 +42,31 @@ nameserver 10.1.1.2
 nameserver 8.8.8.8
 EOF'
 
+## ..:: Installing Docker ::..
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+sudo apt update
+sudo apt install docker-ce -y
+sudo systemctl enable docker
+sudo systemctl restart docker
+sudo usermod -aG docker ubuntu
+
+# Prepariing dockerhost-storage directory
+mkdir -p dockerhost-storage/f5Rancher
+
+cat <<EOF > startDockerContainers.sh
+#!/bin/bash
+
+docker run -d \
+  --restart=always \
+  --name f5Rancher \
+  -p 10.1.20.50:80:80 -p 10.1.20.50:443:443 \
+  -v ~/dockerhost-storage/rancher:/var/lib/rancher \
+  --privileged \
+  rancher/rancher:latest
+EOF
+
+chmod 755 startDockerContainers.sh
+
 sudo reboot
