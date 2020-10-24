@@ -5,6 +5,7 @@
 #  --name f5Rancher \
 #  -p 10.1.20.50:80:80 -p 10.1.20.50:443:443 \
 #  -v ~/dockerhost-storage/rancher:/var/lib/rancher \
+#  --privileged
 #  rancher/rancher:latest
 
 docker run -d \
