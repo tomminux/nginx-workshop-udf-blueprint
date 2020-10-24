@@ -2,8 +2,8 @@
 infra-server ansible_host=10.1.1.4 secondNetIf_name=ens4 secondNetIf_ip=10.1.20.20 hostname=infra-server
 
 [nginx_controller_servers]
-ncontroller-pgsql ansible_host=10.1.1.4 secondNetIf_name=eth1 secondNetIf_ip=10.1.20.20 hostname=infra-server
-nginx-controller ansible_host=10.1.1.8 secondNetIf_name=eth1 secondNetIf_ip=10.1.20.70 hostname=nginx-controller
+ncontroller-pgsql ansible_host=10.1.1.4 secondNetIf_name=ens4 secondNetIf_ip=10.1.20.20 hostname=infra-server
+nginx-controller ansible_host=10.1.1.8 secondNetIf_name=ens4 secondNetIf_ip=10.1.20.70 hostname=nginx-controller
 
 [glusterfs_servers]
 glusterfs-server ansible_host=10.1.1.4 secondNetIf_name=eth1 secondNetIf_ip=10.1.20.20 hostname=infra-server
