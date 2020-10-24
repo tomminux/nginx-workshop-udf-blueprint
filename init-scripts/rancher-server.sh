@@ -11,7 +11,7 @@ sudo chmod 755 /etc/rc.local
 
 sudo sh -c 'cat <<EOF > /etc/rc.local
 #!/bin/bash
-ifconfig ens4 10.1.10.50/24 up
+ifconfig ens4 10.1.20.50/24 up
 exit 0
 EOF'
 
