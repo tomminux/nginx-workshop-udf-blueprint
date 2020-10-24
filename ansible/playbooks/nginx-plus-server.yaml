@@ -96,7 +96,17 @@
         src: resolv.conf
         dest: /etc/resolv.conf
 
-    - name: Copy hosts file
+    - name: Remove resolv.conf link
+      file:
+        path: /etc/resolv.conf
+        state: absent
+
+    - name: Copy resolv.conf file on cluster's master and nodes
       copy:
-        src: hosts
-        dest: /etc/hosts
+        src: resolv.conf
+        dest: /etc/resolv.conf
+
+#    - name: Copy hosts file
+#      copy:
+#        src: hosts
+#        dest: /etc/hosts
