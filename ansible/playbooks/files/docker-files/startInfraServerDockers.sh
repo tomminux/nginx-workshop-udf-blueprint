@@ -1,11 +1,11 @@
 #!/bin/bash
 
-docker run -d \
-  --restart=always \
-  --name f5Rancher \
-  -p 10.1.20.50:80:80 -p 10.1.20.50:443:443 \
-  -v ~/dockerhost-storage/rancher:/var/lib/rancher \
-  rancher/rancher:latest
+#docker run -d \
+#  --restart=always \
+#  --name f5Rancher \
+#  -p 10.1.20.50:80:80 -p 10.1.20.50:443:443 \
+#  -v ~/dockerhost-storage/rancher:/var/lib/rancher \
+#  rancher/rancher:latest
 
 docker run -d \
     -p 10.1.20.30:5000:5000 \
