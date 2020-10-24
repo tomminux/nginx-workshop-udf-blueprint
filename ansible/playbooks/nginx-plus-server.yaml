@@ -91,17 +91,12 @@
         name: nginx
         state: started
 
-    - name: Copy resolv.conf file
-      copy:
-        src: resolv.conf
-        dest: /etc/resolv.conf
-
     - name: Remove resolv.conf link
       file:
         path: /etc/resolv.conf
         state: absent
 
-    - name: Copy resolv.conf file on cluster's master and nodes
+    - name: Copy resolv.conf file
       copy:
         src: resolv.conf
         dest: /etc/resolv.conf
