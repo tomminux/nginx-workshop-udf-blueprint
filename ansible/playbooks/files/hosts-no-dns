@@ -15,30 +15,31 @@ ff02::3 ip6-allhosts
 10.1.1.7        k8s-node2-mgmt.f5-udf.com               k8s-node2-mgmt
 10.1.1.8        nginx-controller-mgmt.f5-udf.com        nginx-controller-mgmt
 10.1.1.9        bigip-security-mgmt.f5-udf.com          bigip-security-mgmt
-10.1.1.10       linux-jumphost-mgmt.f5-udf.com          linux-jumphost-mgmt
-10.1.1.11       nginx-plus-1-mgmt.f5-udf.com            nginx-plus-1-mgmt
-10.1.1.12       nginx-plus-2-mgmt.f5-udf.com            nginx-plus-2-mgmt
+10.1.1.10       linux-jumphost.f5-udf.com          	    linux-jumphost-mgmt
+10.1.1.11       registry-mgmt.f5-udf.com         	      registry-mgmt-mgmt
 10.1.1.13       dockerhost-server-mgmt.f5-udf.com       dockerhost-server-mgmt
+10.1.1.12       nginx-plus-1-mgmt.f5-udf.com            nginx-plus-1-mgmt
+10.1.1.14       nginx-plus-2-mgmt.f5-udf.com            nginx-plus-2-mgmt
 
 # External Network
 10.1.10.9       bigip-security.external.f5-udf.com      bigip-external.internal
 10.1.10.10      linux-jumphost-external.f5-udf.com      linux-jumphost-external
-10.1.10.11      nginx-plus-1-external.f5-udf.com        nginx-plus-1-external
-10.1.10.12      nginx-plus-2-external.f5-udf.com        nginx-plus-2-external
+10.1.10.12      nginx-plus-1-external.f5-udf.com        nginx-plus-1-external
+10.1.10.14      nginx-plus-2-external.f5-udf.com        nginx-plus-2-external
 
 10.1.10.200     grafana.f5-udf.com                      grafana
 10.1.10.201     prometheus.f5-udf.com                   prometheus
 10.1.10.202     rancher.f5-udf.com                      rancher
 10.1.10.203     gitlab.f5-udf.com                       gitlab
-10.1.10.204     elk.f5-udf.com                           elk
+10.1.10.204     elk.f5-udf.com                          elk
 10.1.10.205     nginx-controller.f5-udf.com             nginx-controller
 10.1.10.206     jenkins.f5-udf.com                      jenkins
 
 # Internal Network
 10.1.20.9       bigip-security.internal.f5-udf.com      bigip-security.internal
 10.1.20.10      linux-jumphost-internal.f5-udf.com      linux-jumphost-internal
-10.1.20.11      nginx-plus-1-internal.f5-udf.com        nginx-plus-1-internal
-10.1.20.12      nginx-plus-2-internal.f5-udf.com        nginx-plus-2-internal
+10.1.20.12      nginx-plus-1-internal.f5-udf.com        nginx-plus-1-internal
+10.1.20.13      nginx-plus-2-internal.f5-udf.com        nginx-plus-2-internal
 10.1.20.14      linux-jumphost-internal.f5-udf.com      linux-jumphost-internal
 10.1.20.20      infra-server.f5-udf.com                 infra-server
 10.1.20.20      grafana-host.f5-udf.com                 grafana-host
@@ -47,11 +48,22 @@ ff02::3 ip6-allhosts
 10.1.20.20      glfs.f5-udf.com                         glfs
 10.1.20.25      jenkins-host.f5-udf.com                 jenkins-host
 10.1.20.30      registry.f5-udf.com                     registry
-10.1.20.40      pg-sql-server.f5-udf.com                pgsql-server        
-10.1.20.50      rancher-host.f5-udf.com                 rancher-host       
-10.1.20.60      k8s-master.f5-udf.com                   k8s-master                     
+10.1.20.40      pg-sql-server.f5-udf.com                pgsql-server
+10.1.20.50      rancher-host.f5-udf.com                 rancher-host
+10.1.20.60      k8s-master.f5-udf.com                   k8s-master
 10.1.20.61      k8s-node1.f5-udf.com                    k8s-node1
 10.1.20.62      k8s-node2.f5-udf.com                    k8s-node2
-10.1.20.70      nginx-controller-host.f5-udf.com        nginx-controller-host        
-10.1.20.80      gitlab-host.f5-udf.com                  gitlab-host   
+10.1.20.70      nginx-controller-host.f5-udf.com        nginx-controller-host
+10.1.20.80      gitlab-host.f5-udf.com                  gitlab-host
 10.1.20.90      dockerhost-server.f5-udf.com            dockerhost-server
+
+# E-Commerce Applicaftions
+10.1.10.101	hackazon.f5-udf.com			hackazon
+10.1.10.101	hackazon-cis-only.f5-udf.com		hackazon-cis-only
+10.1.10.101	hackazon-nap.f5-udf.com			hackazon-nap
+10.1.10.101	hackazon-nap-ingress.f5-udf.com 	hackazon-nap-ingress
+
+# Blog Apps Applicaftions
+10.1.10.102	wp-c1.f5-udf.com			wp-c1
+10.1.10.102	wp-c2.f5-udf.com			wp-c2
+10.1.10.102	wp-c3.f5-udf.com			wp-c3
