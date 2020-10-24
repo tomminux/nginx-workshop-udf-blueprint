@@ -149,13 +149,13 @@
         - key
         - crt
     
-    ## RANCHER
-    - name: RancherUI Docker storage configuration
-      file:
-        path: /home/ubuntu/dockerhost-storage/rancher
-        state: directory
-        owner: ubuntu
-        group: ubuntu
+#    ## RANCHER
+#    - name: RancherUI Docker storage configuration
+#      file:
+#        path: /home/ubuntu/dockerhost-storage/rancher
+#        state: directory
+#        owner: ubuntu
+#        group: ubuntu
         
     ## ELK
     - name: ELK Docker storage configuration
