@@ -62,6 +62,16 @@
       apt:
         update_cache: yes
         upgrade: dist
+        
+    - name: Remove resolv.conf link
+      file:
+        path: /etc/resolv.conf
+        state: absent
+
+    - name: Copy resolv.conf file
+      copy:
+        src: resolv.conf
+        dest: /etc/resolv.conf
 
     - name: setting hostname
       template:
