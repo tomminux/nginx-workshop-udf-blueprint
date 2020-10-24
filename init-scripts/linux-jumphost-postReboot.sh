@@ -4,6 +4,7 @@ sudo apt install -y apt-transport-https ca-certificates curl software-properties
 
 ## ..:: Installing dnsmasq ::..
 sudo rm /etc/resolv.conf
+sudo sh -c 'echo "10.1.1.10 linux-jumphost >> /etc/hosts"'
 sudo sh -c 'cat <<EOF > /etc/resolv.conf
 search f5-udf.com
 nameserver 10.1.1.4
