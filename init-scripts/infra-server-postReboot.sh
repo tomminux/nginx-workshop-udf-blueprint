@@ -19,4 +19,5 @@ nameserver 10.1.1.2
 nameserver 8.8.8.8
 EOF'
 
+sudo systemctl enable dnsmasq
 sudo systemctl restart dnsmasq
